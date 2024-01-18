@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"fmt"
+	"os/exec"
 
 	"github.com/quankori/mp4-cli/internal/utils"
 	"github.com/spf13/cobra"
@@ -19,4 +20,12 @@ var listCmd = &cobra.Command{
 
 func init() {
 	// Here you can define flags and configuration settings.
+}
+
+func isFFmpegInstalled() bool {
+	cmd := exec.Command("ffmpeg", "-version")
+	if err := cmd.Run(); err != nil {
+		return false
+	}
+	return true
 }
